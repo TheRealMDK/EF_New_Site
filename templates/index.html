@@ -527,8 +527,45 @@
         </div>
     </div>
 </section>
-<!-- ***** Contact Us Area Ends ***** -->
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var form = document.getElementById("contact");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Perform form validation if needed
+            var name = document.getElementById("name").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var subject = document.getElementById("subject").value.trim();
+            var message = document.getElementById("message").value.trim();
+
+            if (name === '' || email === '' || subject === '' || message === '') {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            // Simulate form submission success message
+            var successMessage = document.createElement("div");
+            successMessage.classList.add("alert", "alert-success");
+            successMessage.textContent = "Thank you for your message! We will get back to you shortly.";
+
+            // Insert success message before the form
+            var contactForm = document.querySelector(".contact-form");
+            contactForm.insertBefore(successMessage, form);
+
+            // Clear form inputs (optional)
+            form.reset();
+
+            // Hide success message after 3 seconds
+            setTimeout(function() {
+                successMessage.style.display = 'none';
+            }, 3000);
+        });
+    });
+</script>
+<!-- ***** Contact Us Area Ends ***** -->
 <!-- Footer -->
 <footer class="footer py-4">
     <div class="container">
