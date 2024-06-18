@@ -48,8 +48,12 @@ def home():
                 server.starttls()
                 server.login(smtp_username, smtp_password)
                 server.sendmail(sender, receiver, message)
+                # If email sent successfully, return success to client
+                return "success"
         except Exception as e:
             print(f"Error sending email: {str(e)}")
+            # If email sending fails, return error to client
+            return str(e), 500
 
     return render_template("index.html")
 

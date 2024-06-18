@@ -46,7 +46,7 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a class="logo" href="https://www.instagram.com/edenfitnessmosselbay/?hl=en">
+                    <a class="logo scroll-to-section" href="#eden_footer">
                         <img alt="company logo" height="50rem" src="../static/assets/images/logos/ef_logo_bare.png">
                         <em>Eden </em>Fitness
                     </a>
@@ -262,7 +262,7 @@
                         </a>
                     </li>
                 </ul>
-                <div class="main-rounded-button"><a href="#">View All Schedules</a></div>
+                <div class="main-rounded-button scroll-to-section"><a href="#schedule">View All Schedules</a></div>
             </div>
             <div class="col-lg-8">
                 <section class='tabs-content'>
@@ -276,7 +276,7 @@
                             cardiovascular prowess, and enduring stamina, all while shunning monotony.</p>
                     </article>
                     <article id='tabs-2'>
-                        <img alt="Second Training" src="../static/assets/images/temp.png">
+                        <img alt="Second Training" src="../static/assets/images/ff_700.png">
                         <h4>FastFit</h4>
                         <p>FastFit ushers in a new era of efficient workouts tailored for the time-conscious
                             individual. With its emphasis on quick, effective exercises, FastFit maximizes results
@@ -284,7 +284,7 @@
                             journey without sacrificing productivity.</p>
                     </article>
                     <article id='tabs-3'>
-                        <img alt="Third Class" src="../static/assets/images/temp.png">
+                        <img alt="Third Class" src="../static/assets/images/wl_700.png">
                         <h4>Weight-lifting Club</h4>
                         <p>Weight-lifting showcases the precision and power of strength sports, drawing enthusiasts
                             into its realm of technical mastery and explosive energy. With lifts like the snatch and
@@ -292,7 +292,7 @@
                             not just physical strength but also mental fortitude.</p>
                     </article>
                     <article id='tabs-4'>
-                        <img alt="Fourth Training" src="../static/assets/images/temp.png">
+                        <img alt="Fourth Training" src="../static/assets/images/pt_700.png">
                         <h4>Personal Training</h4>
                         <p>Personal Training offers a bespoke fitness experience, tailored to individual goals and
                             needs. With personalized guidance and support, it's a journey of empowerment and growth,
@@ -528,46 +528,67 @@
     </div>
 </section>
 
-<script>
+<!-- <script>
     document.addEventListener("DOMContentLoaded", function() {
-        var form = document.getElementById("contact");
+    var form = document.getElementById("contact");
 
-        form.addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent default form submission
+    form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent default form submission
 
-            // Perform form validation if needed
-            var name = document.getElementById("name").value.trim();
-            var email = document.getElementById("email").value.trim();
-            var subject = document.getElementById("subject").value.trim();
-            var message = document.getElementById("message").value.trim();
+        // Perform form validation if needed
+        var name = document.getElementById("name").value.trim();
+        var email = document.getElementById("email").value.trim();
+        var subject = document.getElementById("subject").value.trim();
+        var message = document.getElementById("message").value.trim();
 
-            if (name === '' || email === '' || subject === '' || message === '') {
-                alert("Please fill out all fields.");
-                return;
+        if (name === '' || email === '' || subject === '' || message === '') {
+            alert("Please fill out all fields.");
+            return;
+        }
+
+        // Submit form data via AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/");
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Success response from server
+                var successMessage = document.createElement("div");
+                successMessage.classList.add("alert", "alert-success");
+                successMessage.textContent = "Thank you for your message! We will get back to you shortly.";
+
+                // Insert success message before the form
+                var contactForm = document.querySelector(".contact-form");
+                contactForm.insertBefore(successMessage, form);
+
+                // Clear form inputs (optional)
+                form.reset();
+
+                // Hide success message after 3 seconds
+                setTimeout(function() {
+                    successMessage.style.display = 'none';
+                }, 3000);
+            } else {
+                // Error response from server
+                alert("Failed to send message. Please try again later.");
             }
-
-            // Simulate form submission success message
-            var successMessage = document.createElement("div");
-            successMessage.classList.add("alert", "alert-success");
-            successMessage.textContent = "Thank you for your message! We will get back to you shortly.";
-
-            // Insert success message before the form
-            var contactForm = document.querySelector(".contact-form");
-            contactForm.insertBefore(successMessage, form);
-
-            // Clear form inputs (optional)
-            form.reset();
-
-            // Hide success message after 3 seconds
-            setTimeout(function() {
-                successMessage.style.display = 'none';
-            }, 3000);
-        });
+        };
+        xhr.onerror = function() {
+            alert("Failed to send message. Please try again later.");
+        };
+        var formData = {
+            "name": name,
+            "email": email,
+            "subject": subject,
+            "message": message
+        };
+        xhr.send(JSON.stringify(formData));
     });
-</script>
+});
+</script> -->
 <!-- ***** Contact Us Area Ends ***** -->
 <!-- Footer -->
-<footer class="footer py-4">
+<footer class="footer py-4" id="eden_footer">
     <div class="container">
         <div class="row align-items-center justify-content-center">
             <!-- First Company -->

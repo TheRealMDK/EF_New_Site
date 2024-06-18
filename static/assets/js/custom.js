@@ -49,7 +49,7 @@
 	    $(document).on("scroll", onScroll);
 	    
 	    //smoothscroll
-	    $('.scroll-to-section a[href^="#"]').on('click', function (e) {
+	    $('.scroll-to-section a[href^="#"], a.logo[href^="#"]').on('click', function (e) {
 	        e.preventDefault();
 	        $(document).off("scroll");
 	        
