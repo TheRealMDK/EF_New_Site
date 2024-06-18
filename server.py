@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import smtplib
 import os
 from dotenv import load_dotenv
@@ -18,43 +18,40 @@ app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
-        name = request.form.get("name")
-        email = request.form.get("email")
-        user_subject = request.form.get("subject")
-        message = request.form.get("message")
+        try:
+            data = request.get_json()  # Parse JSON data from AJAX request
+            name = data.get("name")
+            email = data.get("email")
+            user_subject = data.get("subject")
+            message = data.get("message")
 
-        # Email sending logic using environment variables
-        smtp_server = os.environ.get("MG_SMTP_SERVER")
-        smtp_username = os.environ.get("MG_SMTP_USERNAME")
-        smtp_password = os.environ.get("MG_SMTP_PASSWORD")
-        port = 587
-        sender = "edenfitness4@gmail.com"
-        receiver = "info@edenfitness.co.za"
+            # Email sending logic using environment variables
+            smtp_server = os.environ.get("MG_SMTP_SERVER")
+            smtp_username = os.environ.get("MG_SMTP_USERNAME")
+            smtp_password = os.environ.get("MG_SMTP_PASSWORD")
+            port = 587
+            sender = "edenfitness4@gmail.com"
+            receiver = "info@edenfitness.co.za"
 
-        # Construct the email message
-        subject = f"New email enquiry received."
-        body = ""
-        body += (f"Name: {name}\n"
-                 f"Email: {email}\n"
-                 f"Subject: {user_subject}\n"
-                 f"Message: {message}"
-                 )
-        message = f"Subject: {subject}\nTo: {receiver}\nFrom: {sender}\n\n{body}"
-        message = message.encode("utf-8")
+            # Construct the email message
+            subject = f"New email enquiry received: {user_subject}"
+            body = f"Name: {name}\nEmail: {email}\nSubject: {user_subject}\nMessage: {message}"
+            email_message = f"Subject: {subject}\nTo: {receiver}\nFrom: {sender}\n\n{body}"
 
-        # Send the email
-        try:    
+            # Send the email
             with smtplib.SMTP(smtp_server, port) as server:
                 server.starttls()
                 server.login(smtp_username, smtp_password)
-                server.sendmail(sender, receiver, message)
-                # If email sent successfully, return success to client
-                return "success"
+                server.sendmail(sender, receiver, email_message.encode("utf-8"))
+
+            # If email sent successfully, return success to client
+            return jsonify({"message": "Email sent successfully"}), 200
         except Exception as e:
             print(f"Error sending email: {str(e)}")
             # If email sending fails, return error to client
-            return str(e), 500
+            return jsonify({"error": str(e)}), 500
 
+    # Handle GET request or non-AJAX POST request
     return render_template("index.html")
 
 
