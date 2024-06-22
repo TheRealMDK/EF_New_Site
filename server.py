@@ -7,12 +7,12 @@ from waitress import serve
 # python -m pip install -r requirements.txt
 
 # Load environment variables from the .env file
-load_dotenv("./.venv/Scripts/envvars.env")
+load_dotenv()
 
 # Initialize the Flask app
 app = Flask(__name__)
 # Set a secret key for CSRF protection
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 
 
 # Define the route for the home page
@@ -27,9 +27,9 @@ def home():
             message = data.get("message")
 
             # Email sending logic using environment variables
-            smtp_server = os.environ.get("MG_SMTP_SERVER")
-            smtp_username = os.environ.get("MG_SMTP_USERNAME")
-            smtp_password = os.environ.get("MG_SMTP_PASSWORD")
+            smtp_server = os.getenv("MG_SMTP_SERVER")
+            smtp_username = os.getenv("MG_SMTP_USERNAME")
+            smtp_password = os.getenv("MG_SMTP_PASSWORD")
             port = 587
             sender = "edenfitness4@gmail.com"
             receiver = "info@edenfitness.co.za"
