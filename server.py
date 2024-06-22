@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 import smtplib
 import os
 from dotenv import load_dotenv
+from waitress import serve
 
 # python -m pip install -r requirements.txt
 
@@ -57,4 +58,4 @@ def home():
 
 # Run the Flask app if this file is executed directly
 if __name__ == "__main__":
-    app.run(debug=True)
+    serve(app, host="0.0.0.0", port=8000)
