@@ -552,7 +552,7 @@
                             </div>
                             <div class="down-content">
                                 <span>Muscle Trainer</span>
-                                <h4>Anneke Spies</h4>
+                                <h4>Anneke Spies-Burger</h4>
                                 <p>
                                     Bitters cliche tattooed 8-bit distillery
                                     mustache. Keytar succulents gluten-free
@@ -733,6 +733,18 @@
                                     <div class="col-md-6 col-sm-12">
                                         <fieldset>
                                             <input
+                                                id="number"
+                                                name="number"
+                                                pattern="(\+27\s?|0)\d{2}[-\s]?\d{3}[-\s]?\d{4}"
+                                                placeholder="Your Number*"
+                                                required=""
+                                                type="tel"
+                                            />
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <fieldset>
+                                            <input
                                                 id="email"
                                                 name="email"
                                                 pattern="[^ @]*@[^ @]*"
@@ -742,12 +754,12 @@
                                             />
                                         </fieldset>
                                     </div>
-                                    <div class="col-md-12 col-sm-12">
+                                    <div class="col-md-6 col-sm-12">
                                         <fieldset>
                                             <input
                                                 id="subject"
                                                 name="subject"
-                                                placeholder="Subject"
+                                                placeholder="Subject*"
                                                 required=""
                                                 type="text"
                                             />
@@ -792,6 +804,7 @@
 
                     // Perform form validation if needed
                     var name = document.getElementById("name").value.trim();
+                    var number = document.getElementById("number").value.trim();
                     var email = document.getElementById("email").value.trim();
                     var subject = document
                         .getElementById("subject")
@@ -802,6 +815,7 @@
 
                     if (
                         name === "" ||
+                        number === "" ||
                         email === "" ||
                         subject === "" ||
                         message === ""
@@ -835,6 +849,7 @@
                     };
                     var formData = {
                         name: name,
+                        number: number,
                         email: email,
                         subject: subject,
                         message: message,

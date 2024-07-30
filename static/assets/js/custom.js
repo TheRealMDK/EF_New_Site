@@ -66,7 +66,7 @@
                         500,
                         'swing',
                         function () {
-                            window.location.hash = target;
+                            window.location.hash = '';
                             $(document).on('scroll', onScroll);
                         }
                     );

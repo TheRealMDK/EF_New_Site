@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 import smtplib
+import ssl
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 import os
 from dotenv import load_dotenv
 from waitress import serve
@@ -22,31 +25,44 @@ def home():
         try:
             data = request.get_json()  # Parse JSON data from AJAX request
             name = data.get("name")
+            number = data.get("number")
             email = data.get("email")
             user_subject = data.get("subject")
-            message = data.get("message")
+            user_message = data.get("message")
 
             # Email sending logic using environment variables
-            smtp_server = os.getenv("MG_SMTP_SERVER")
-            smtp_username = os.getenv("MG_SMTP_USERNAME")
-            smtp_password = os.getenv("MG_SMTP_PASSWORD")
-            port = 587
-            sender = "edenfitness4@gmail.com"
-            receiver = "info@edenfitness.co.za"
+            smtp_server = os.getenv("EF_SMTP_SERVER")
+            smtp_username = os.getenv("EF_SMTP_USERNAME")
+            smtp_password = os.getenv("EF_SMTP_PASSWORD")
+            port = 465
+            sender_email = "website@edenfitness.co.za"
+            receiver_email = "accounts@edenfitness.co.za"
 
             # Construct the email message
-            subject = f"New email enquiry received: {user_subject}"
-            body = f"Name: {name}\nEmail: {email}\nSubject: {user_subject}\nMessage: {message}"
-            email_message = f"Subject: {subject}\nTo: {receiver}\nFrom: {sender}\n\n{body}"
+            subject = f"{user_subject}"
+            body = f"Name: {name}\nNumber: {number}\nEmail: {email}\n\n{user_message}"
+            
+            # Create a multipart message and set headers
+            message = MIMEMultipart()
+            message['From'] = sender_email
+            message['To'] = receiver_email
+            message['Subject'] = subject
+
+            # Add body to email
+            message.attach(MIMEText(body, 'plain'))
+
+            # Secure SSL context
+            context = ssl.create_default_context()
 
             # Send the email
-            with smtplib.SMTP(smtp_server, port) as server:
-                server.starttls()
+            with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
                 server.login(smtp_username, smtp_password)
-                server.sendmail(sender, receiver, email_message.encode("utf-8"))
+                server.sendmail(sender_email, receiver_email, message.as_string())
+                print('Email sent successfully!')
 
             # If email sent successfully, return success to client
             return jsonify({"message": "Email sent successfully"}), 200
+        
         except Exception as e:
             print(f"Error sending email: {str(e)}")
             # If email sending fails, return error to client

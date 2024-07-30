@@ -1,1 +1,12 @@
+# Python files
 .venv
+.env
+__pycache__
+
+# IDE files
+.idea
+.vscode/
+
+# Other OS files
+.DS_Store
+Thumbs.db
