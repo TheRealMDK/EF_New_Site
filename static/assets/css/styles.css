@@ -264,7 +264,11 @@ body {
 }
 
 .main-button a:hover {
-    background-color: #939598;
+    opacity: 0.7;
+}
+
+.main-button a:active {
+    opacity: 1;
 }
 
 /* 
@@ -869,6 +873,10 @@ Our Classes
     transition: all 0.3s;
 }
 
+#tabs ul li a:hover {
+    color:#00c2df;
+}
+
 #tabs .main-rounded-button a {
     text-align: center;
     padding: 20px 30px;
@@ -885,7 +893,11 @@ Our Classes
 }
 
 #tabs .main-rounded-button a:hover {
-    background-color: #939598;
+    opacity: 0.7;
+}
+
+#tabs .main-rounded-button a:active {
+    opacity: 1;
 }
 
 #tabs ul li a img {
@@ -934,6 +946,7 @@ Our Classes
     font-size: 14px;
     color: #7a7a7a;
     margin-bottom: 28px;
+    text-align: justify;
 }
 
 /* 
@@ -1190,7 +1203,11 @@ contact
 }
 
 .contact-form button:hover {
-    background-color: #939598;
+    opacity: 0.7;
+}
+
+.contact-form button:active {
+    opacity: 1;
 }
 
 /* 
@@ -1431,4 +1448,13 @@ responsive
 
 .section-heading img {
     margin: 10px 0px !important;
+}
+
+.down-content p {
+    min-height: 125px;
+    text-align: justify;
+}
+
+.top-row-trainer {
+    margin-top: 13px;
 }
