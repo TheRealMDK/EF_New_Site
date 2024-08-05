@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session
+import secrets
 import smtplib
 import ssl
 from email.mime.multipart import MIMEMultipart
@@ -17,6 +18,10 @@ app = Flask(__name__)
 # Set a secret key for CSRF protection
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 
+@app.before_request
+def generate_csrf_token():
+    if 'csrf_token' not in session:
+        session['csrf_token'] = secrets.token_hex(16)
 
 # Define the route for the home page
 @app.route("/", methods=["GET", "POST"])
@@ -24,6 +29,9 @@ def home():
     if request.method == "POST":
         try:
             data = request.get_json()  # Parse JSON data from AJAX request
+            csrf_token = data.get("csrf_token")
+            if csrf_token != session.get('csrf_token'):
+                return jsonify({"error": "CSRF token mismatch"}), 403
             name = data.get("name")
             number = data.get("number")
             email = data.get("email")
@@ -69,7 +77,7 @@ def home():
             return jsonify({"error": str(e)}), 500
 
     # Handle GET request or non-AJAX POST request
-    return render_template("index.html")
+    return render_template("index.html", csrf_token=session.get('csrf_token'))
 
 
 # Run the Flask app if this file is executed directly

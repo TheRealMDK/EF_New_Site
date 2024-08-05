@@ -779,12 +779,16 @@ features
 */
 
 #features {
-    margin-bottom: 80px;
+    margin-bottom: 50px;
 }
 
 .feature-item {
     display: inline-block;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
+}
+.feature-item:last-child {
+    display: inline-block;
+    margin-bottom: 0px;
 }
 
 .feature-item .left-icon img {
@@ -868,7 +872,7 @@ Our Classes
 */
 
 #our-classes {
-    margin-bottom: 140px;
+    margin-bottom: 50px;
 }
 
 #tabs ul {
@@ -892,7 +896,7 @@ Our Classes
     padding: 30px 30px;
     display: inline-block;
     background-color: #fff;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     font-size: 19px;
     color: #232d39;
@@ -984,7 +988,7 @@ schedule
 */
 
 #schedule {
-    padding: 0px 0px 50px 0px;
+    /* padding: 0px 0px 50px 0px; */
     background-image: url(../images/schedule-bg.png);
     background-position: center center;
     background-repeat: no-repeat;
@@ -1102,7 +1106,7 @@ trainers
 #trainers .trainer-item {
     background-color: #fff;
     border-radius: 5px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
     padding: 40px;
 }
 
@@ -1157,7 +1161,7 @@ contact
 */
 
 #contact-us {
-    margin-top: 140px;
+    margin-top: 50px;
 }
 
 #contact-us .container-fluid .col-lg-6 {
@@ -1439,7 +1443,7 @@ responsive
     }
 
     #features {
-        margin-bottom: 110px;
+        margin-bottom: 50px;
     }
 
     #features .feature-item {

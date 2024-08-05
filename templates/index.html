@@ -400,7 +400,9 @@
                                 />
                                 <h4>Commercial</h4>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet ultricies orci, non pellentesque arcu. Proin at workout turpis, a fitness nisi. Cras varius, libero et training sollicitudin, orci est gravida justo, eget exercise dolor sapien a justo. Phasellus facilisis lectus nec risus elementum, et conditioning turpis commodo. Nam interdum, urna vitae blandit pulvinar, mi sapien viverra lectus, non regimen arcu leo sit amet libero.
+                                    This section is kitted out with the world famous Swedish GT Selectorized and Cable Machines, SL Plate Loaded circuit, Precor Cardio Range and a variety of dumbbells (over 50kg), kettlebells and barbells for the focused free-weight functionalist, this top-of-the-range bio-mechanically minded equipment will not leave you wanting.
+                                    <br><br>
+                                    We also offer an Infrared Sauna, personal training, strength & conditioning training,functional fitness classes and much more.
                                 </p>
                             </article>
                             <article id="tabs-2">
@@ -413,6 +415,8 @@
                                     CrossFit beckons individuals of all ages and abilities with its inclusive approach to fitness. It merges functional body-weight and weighted exercises into exhilarating, high-tempo workouts. From pull-ups and push-ups to running, weightlifting, gymnastics, and rowing, CrossFit offers a diverse range of challenges. It's a promise of strength, cardiovascular prowess, and enduring stamina, all while shunning monotony.
                                     <br><br>
                                     FastFit ushers in a new era of efficient workouts tailored for the time-conscious individual. With its emphasis on quick, effective exercises, FastFit maximizes results in minimal time. It's the ultimate solution for those seeking to optimize their fitness journey without sacrificing productivity.
+                                    <br><br>
+                                    CrossFit Kids teaches foundational movement patterns, improving muscular fitness, using a broad and general approach, learning movement patterns for the squat, deadlift, press, and more, through age-appropriate progressions and games with their own body weight or equipment that is easily managed by the age group.
                                 </p>
                             </article>
                             <article id="tabs-3">
@@ -422,17 +426,19 @@
                                 />
                                 <h4>Weightlifting</h4>
                                 <p>
+                                    SMAI Lifting Platforms form the solid base of our weightlifting area. It includes all the essentials such as premium Eleiko and Gymway Calibrated barbells and plates, Half Power Cage, Full Power Cage, Squat Racks, Jerk Blocks, Full Size 4m x 4m Competition Platform, Reverse Hyper, GHD Machine, Belt-Squat and much more. This area is sure to be a meeting place for the professional and novice alike.
+                                    <br><br>
                                     Weightlifting showcases the precision and power of strength sports, drawing enthusiasts into its realm of technical mastery and explosive energy. With lifts like the snatch and clean and jerk, it's a pursuit that demands focus, discipline, and dedication, promising not just physical strength but also mental fortitude.
                                 </p>
                             </article>
                             <article id="tabs-4">
                                 <img
                                     alt="Fourth Class"
-                                    src="../static/assets/images/wl_700.png"
+                                    src="../static/assets/images/pl_700.png"
                                 />
                                 <h4>Powerlifting</h4>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet ultricies orci, non pellentesque arcu. Proin at workout turpis, a fitness nisi. Cras varius, libero et training sollicitudin, orci est gravida justo, eget exercise dolor sapien a justo. Phasellus facilisis lectus nec risus elementum, et conditioning turpis commodo. Nam interdum, urna vitae blandit pulvinar, mi sapien viverra lectus, non regimen arcu leo sit amet libero.
+                                    SMAI Lifting Platforms form the solid base of our powerlifting area. It includes all the essentials such as premium Eleiko and Rebel Calibrated barbells and plates, ER Squat Bench Combo Rack, Full Power Cage, Reverse Hyper, GHD Machine, Belt-Squat and much more. This area is sure to be a meeting place for the professional and novice alike.
                                 </p>
                             </article>
                             <article id="tabs-5">
@@ -442,7 +448,7 @@
                                 />
                                 <h4>Strongmen</h4>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet ultricies orci, non pellentesque arcu. Proin at workout turpis, a fitness nisi. Cras varius, libero et training sollicitudin, orci est gravida justo, eget exercise dolor sapien a justo. Phasellus facilisis lectus nec risus elementum, et conditioning turpis commodo. Nam interdum, urna vitae blandit pulvinar, mi sapien viverra lectus, non regimen arcu leo sit amet libero.
+                                    The name says it all! Come check out the interesting tools and contraptions we have devised to bring strongman training back into the gym. This area includes specialised equipment such as a Viking Press, Various Axle Bars, Atlas Stones and Boxes, 1 Ton I-Beam Trolley on a 35m train track, Heavy Sandbags, Various Strongman Logs, Farmers Carry Bars, Sleds, Yokes and much more.
                                 </p>
                             </article>
                         </section>
@@ -712,6 +718,7 @@
                     <div class="col-lg-6 col-md-12 col-xs-12">
                         <div class="contact-form">
                             <form action="" id="contact" method="post">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <fieldset>
@@ -806,6 +813,7 @@
                     var message = document
                         .getElementById("message")
                         .value.trim();
+                    var csrfToken = document.querySelector('input[name="csrf_token"]').value;
 
                     if (
                         name === "" ||
@@ -847,6 +855,7 @@
                         email: email,
                         subject: subject,
                         message: message,
+                        csrf_token: csrfToken, // Include CSRF token in the request
                     };
                     xhr.send(JSON.stringify(formData));
                 });
