@@ -340,6 +340,11 @@ header
     transition: all 0.3s ease 0s;
 }
 
+.header-area .main-nav .logo img {
+    margin-bottom: 15px;
+    margin-right: 10px;
+}
+
 .header-area .main-nav .logo em {
     font-style: normal;
     color: #00c2df;
@@ -1160,9 +1165,9 @@ contact
 --------------------------------------------- 
 */
 
-#contact-us {
+/* #contact-us {
     margin-top: 50px;
-}
+} */
 
 #contact-us .container-fluid .col-lg-6 {
     padding: 0px;
@@ -1491,8 +1496,63 @@ responsive
     margin-top: 13px;
 }
 
+.bottom-row-trainer {
+    margin-bottom: 50px;
+}
+
 .vitality {
     background-color: rgba(250, 250, 250, 0.7);
     margin: 1px 1px 1px 1px !important;
     padding: 0;
+}
+
+#partners {
+    background-color: rgba(35, 45, 57, 1);
+}
+
+#partners .section-heading h2, #partners .section-heading p {
+    color: rgb(255, 255, 255);
+}
+
+.partners {
+    display: flex;
+    justify-content: space-between; 
+    flex-wrap: wrap;
+}
+
+.partners p {
+    color: rgb(255, 255, 255);
+}
+
+.custom-col {
+    flex: 1; 
+    max-width: calc(50% - 10px); 
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+    margin: 0 15px; /* Adjust the margin to control the gap between columns */
+    margin-bottom: 50px;
+    box-sizing: border-box; 
+}
+
+.partner-logo {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+}
+
+.partner-logo img {
+    /* height: 75rem; */
+    max-width: 100%; /* Ensure images are responsive */
+}
+
+.col p {
+    text-align: center; 
+    padding-bottom: 30px;
+    margin: 0 15px;
+}
+
+@media (max-width: 767px) {
+    .custom-col {
+        max-width: 100%; /* Full width on lg screens and smaller */
+        margin: 0 0 30px 0; /* Adjust margin for spacing between rows */
+    }
 }

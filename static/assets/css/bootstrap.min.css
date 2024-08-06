@@ -191,8 +191,6 @@ figure {
 img {
     vertical-align: middle;
     border-style: none;
-    margin-bottom: 15px !important;
-    margin-right: 10px !important;
 }
 svg {
     overflow: hidden;
