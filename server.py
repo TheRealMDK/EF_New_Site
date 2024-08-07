@@ -39,8 +39,8 @@ def home():
             user_message = data.get("message")
 
             # Email sending logic using environment variables
-            smtp_server = os.getenv("EF_SMTP_SERVER")
-            smtp_username = os.getenv("EF_SMTP_USERNAME")
+            smtp_server = "mail.edenfitness.co.za"
+            smtp_username = "website@edenfitness.co.za"
             smtp_password = os.getenv("EF_SMTP_PASSWORD")
             port = 465
             sender_email = "website@edenfitness.co.za"
