@@ -112,3 +112,67 @@
         });
     }
 })(window.jQuery);
+
+document.addEventListener("DOMContentLoaded", function () {
+    var form = document.getElementById("contact");
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Perform form validation if needed
+        var name = document.getElementById("name").value.trim();
+        var number = document.getElementById("number").value.trim();
+        var email = document.getElementById("email").value.trim();
+        var subject = document
+            .getElementById("subject")
+            .value.trim();
+        var message = document
+            .getElementById("message")
+            .value.trim();
+        var csrfToken = document.querySelector('input[name="csrf_token"]').value;
+
+        if (
+            name === "" ||
+            number === "" ||
+            email === "" ||
+            subject === "" ||
+            message === ""
+        ) {
+            alert("Please fill out all fields.");
+            return;
+        }
+
+        // Submit form data via AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/");
+        xhr.setRequestHeader(
+            "Content-Type",
+            "application/json;charset=UTF-8"
+        ); // Set content type to JSON
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                alert(response.message); // Show success message from server
+                form.reset();
+            } else {
+                alert(
+                    "Failed to send message. Please try again later."
+                );
+            }
+        };
+        xhr.onerror = function () {
+            alert(
+                "Failed to send message. Please try again later."
+            );
+        };
+        var formData = {
+            name: name,
+            number: number,
+            email: email,
+            subject: subject,
+            message: message,
+            csrf_token: csrfToken, // Include CSRF token in the request
+        };
+        xhr.send(JSON.stringify(formData));
+    });
+});
