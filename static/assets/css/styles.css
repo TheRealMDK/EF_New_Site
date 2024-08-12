@@ -796,21 +796,27 @@ features
 }
 
 .feature-item {
-    display: inline-block;
+    display: flex;
+    align-items: flex-start;
     margin-bottom: 50px;
 }
+
 .feature-item:last-child {
-    display: inline-block;
     margin-bottom: 0px;
 }
 
-.feature-item .left-icon img {
-    float:left;
+.feature-item .left-icon {
     margin-right: 30px;
+    flex-shrink: 0; /* Prevents the icon from shrinking */
+}
+
+.feature-item .left-icon img {
+    width: auto; /* Ensure the image maintains its aspect ratio */
+    height: auto; /* Ensure the image maintains its aspect ratio */
 }
 
 .feature-item .right-content {
-    display: block;
+    flex-grow: 1;
 }
 
 .feature-item .right-content h4 {
@@ -837,11 +843,15 @@ features
 }
 
 @media (max-width: 576px) {
+    .feature-item {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
     .feature-item .right-content p {
         font-size: 12px;
         line-height: initial;
     }
-    
 }
 
 /*
