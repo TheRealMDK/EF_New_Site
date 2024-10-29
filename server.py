@@ -6,7 +6,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import os
 from dotenv import load_dotenv
-from waitress import serve
+from gunicorn.app.base import BaseApplication
 
 # python -m pip install -r requirements.txt
 
@@ -80,6 +80,25 @@ def home():
     return render_template("index.html", csrf_token=session.get('csrf_token'))
 
 
-# Run the Flask app if this file is executed directly
+# Custom Gunicorn Application
+class GunicornApp(BaseApplication):
+    def __init__(self, app, options=None):
+        self.app = app
+        self.options = options or {}
+        super().__init__()
+
+    def load_config(self):
+        for key, value in self.options.items():
+            self.cfg.set(key.lower(), value)
+
+    def load(self):
+        return self.app
+
+# Define the options for Gunicorn
+gunicorn_options = {
+    'bind': '0.0.0.0:8000',  # Bind to all interfaces on port 8000
+    'workers': 193,  # Adjust the number of workers based on your needs recommended qty = (2 * CPU Count) + 1. run 'nproc' for CPU count. Ensure enough RAM available. Run 'free -h' to see RAM.
+}
+
 if __name__ == "__main__":
-    serve(app, host="0.0.0.0", port=8000)
+    GunicornApp(app, options=gunicorn_options).run()
